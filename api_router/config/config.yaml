@@ -1,0 +1,17 @@
+server:
+  name: api_router
+  port: 8000
+  address: 127.0.0.1:8000
+  jwtSecret: ferriem
+
+mysql:
+  driver: mysql
+  host: 127.0.0.1
+  port: 3306
+  username: root
+  password: 04271017
+  database: tiny_tiktok
+
+etcd:
+  address: 127.0.0.1:2379
+
