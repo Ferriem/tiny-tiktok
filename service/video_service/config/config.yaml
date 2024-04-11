@@ -1,0 +1,30 @@
+server:
+  name: user_service
+  address: 127.0.0.1:8002
+
+mysql:
+  driver: mysql
+  host: 127.0.0.1
+  port: 3306
+  username: root
+  password: "04271017"
+  database: tiny_tiktok
+
+oss:
+  bucketName: ferriemtiktok
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  accessKeyId: https://github.com/Ferriem/tiny-tiktok/security/secret-scanning/unblock-secret/2expiFVHm0XRHgG56WYfalzMGGd
+  accessKeySecret: https://github.com/Ferriem/tiny-tiktok/security/secret-scanning/unblock-secret/2expiGQFOSxgpZOdLPJhECkJ1p5
+
+rabbitMQ:
+  user: guest
+  password: guest
+  address: localhost:5672
+
+redis:
+  address: 127.0.0.1:6379
+  password:
+  db: 0
+
+
+  

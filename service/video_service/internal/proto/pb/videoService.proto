@@ -1,0 +1,191 @@
+syntax = "proto3";
+
+option go_package = "tiny_tiktok/service/video_service/internal/proto/pb;proto";
+
+package proto;
+
+//protoc -I internal/proto/pb --go_out=./internal/proto --go_opt=paths=source_relative --go-grpc_out=./internal/proto --go-grpc_opt=paths=source_relative ./internal/proto/pb/*.proto
+
+message Video {
+    //@gotag json:"id" form:"id" uri:"id" 
+    int64 Id = 1; //视频id
+    //@gotag json:"auth_id" form:"auth_id" uri:"auth_id"
+    int64 AuthId = 2; //作者id
+    //@gotag json:"play_url" form:"play_url" uri:"play_url"
+    string PalyUrl = 3; //播放地址
+    //@gotag json:"cover_url" form:"cover_url" uri:"cover_url"
+    string CoverUrl = 4; //封面地址
+    //@gotag json:"favorite_count" form:"favorite_count" uri:"favorite_count"
+    int64 FavoriteCount = 5; //喜欢数
+    //@gotag json:"comment_count" form:"comment_count" uri:"comment_count"
+    int64 CommentCount = 6; //评论数
+    //@gotag json:"is_favorite" form:"is_favorite" uri:"is_favorite"
+    bool IsFavorite = 7; //喜欢
+    //@gotag json:"title" form:"title" uri:"title"
+    string Title = 8; //标题
+}
+
+message Comment {
+    //@gotag json:"id" form:"id" uri:"id"
+    int64 Id = 1;
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 2;
+    //@gotag json:"content" form:"content" uri:"content"
+    string Content = 3;
+    //@gotag json:"create_at" form:"create_at" uri:"create_at"
+    string CreateAt = 4;
+}
+
+message FeedRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 LastestTime = 1; //最新时间
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 2;
+}
+
+message FeedResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    string StatusMsg = 2;
+    //@gotag json:"videos" form:"videos" uri:"videos"
+    repeated Video Videos = 3;
+    //@gotag json:"next_time" form:"next_time" uri:"next_time"
+    int64 NextTime = 4; 
+}
+
+message PublishActionRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 1;
+    //@gotag json:"data" form:"data" uri:"data"
+    bytes Data = 2;
+    //@gotag json:"title" form:"title" uri:"title"
+    string Title = 3;
+}
+
+message PublishActionResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    string StatusMsg = 2;
+}
+
+message PublishListRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 1;
+}
+
+message PublishListResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    string StatusMsg = 2;
+    //@gotag json:"video_list" form:"video_list" uri:"video_list"
+    repeated Video VideoList = 3;
+}
+
+message FavoriteRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 1;
+    //@gotag json:"video_id" form:"video_id" uri:"video_id"
+    int64 VideoId = 2;
+    //@gotag json:"action_type" form:"action_type" uri:"action_type"
+    int64 ActionType = 3;
+}
+
+message FavoriteResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    int64 StatusMsg = 2;
+}
+
+message FavoriteListRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 1;
+}
+
+message FavoriteListResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    int64 StatusMsg = 2;
+    //@gotag json:"video_list" form:"video_list" uri:"video_list"
+    repeated Video VideoList = 3;
+}
+
+message CommentRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 1;
+    //@gotag json:"video_id" form:"video_id" uri:"video_id"
+    int64 VideoId = 2;
+    //@gotag json:"action_type" form:"action_type" uri:"action_type"
+    int64 ActionType = 3;
+    //@gotag json:"content" form:"content" uri:"content"
+    string Content = 4;
+    //@gotag json:"comment_id" form:"comment_id" uri:"comment_id"
+    int64 CommentId = 5;
+}
+
+message CommentResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    int64 StatusMsg = 2;
+    //@gotag json:"comment_list" form:"comment_list" uri:"comment_list"
+    Comment Comment = 3;
+}
+
+message CommentListRequest {
+    //@gotag json:"video_id" form:"video_id" uri:"video_id"
+    int64 VideoId = 1;
+}
+
+message CommentListReponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    int64 StatusMsg = 2;
+    //@gotag json:"comment_list" form:"comment_list" uri:"comment_list"
+    repeated Comment CommentList = 3;
+}
+
+message Count {
+    //@gotag json:"video_id" form:"video_id" uri:"video_id"
+    int64 VideoId = 1;
+    //@gotag json:"favorite_count" form:"favorite_count" uri:"favorite_count"
+    int64 FavoriteCount = 2;
+}
+
+message CountRequest {
+    //@gotag json:"user_id" form:"user_id" uri:"user_id"
+    int64 UserId = 1;
+}
+
+message CountResponse {
+    //@gotag json:"status_code" form:"status_code" uri:"status_code"
+    int64 StatusCode = 1;
+    //@gotag json:"status_msg" form:"status_msg" uri:"status_msg"
+    int64 StatusMsg = 2;
+    //@gotag json:"total_favorite" form:"total_favorite" uri:"total_favorite"
+    int64 TotalFavorite = 3;
+    //@gotag json:"video_count" form:"video_count" uri:"video_count"
+    int64 VideoCount = 4;
+    //@gotag json:"count_list" form:"count_list" uri:"count_list"
+    repeated Count CountList = 5;
+}
+
+service VideoService {
+    rpc Feed(FeedRequest) returns (FeedResponse){};
+
+    rpc PublishAction(PublishActionRequest) returns (PublishActionResponse){};
+    rpc PublishList(PublishListRequest) returns (PublishListResponse){};
+
+    rpc Favorite(FavoriteRequest) returns (FavoriteResponse){};
+    rpc FavoriteList(FavoriteListRequest) returns (FavoriteListResponse){};
+
+    rpc Comment(CommentRequest) returns (CommentResponse){};
+    rpc CommentList(CommentListRequest) returns (CommentListReponse){};
+
+    rpc CountInfo(CountRequest) returns (CountResponse){};
+}
